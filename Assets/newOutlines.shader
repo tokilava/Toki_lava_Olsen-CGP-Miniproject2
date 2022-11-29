@@ -5,21 +5,16 @@ Shader "Unlit/newOutlines"
     {
         
         _Thickness ("Thickness", Float) = 0.1
-        //[MaterialToggle] _Outlines("Outlines", Float) = 0
-        //[MaterialToggle] _Silhouette("Silhouette", Float) = 0
          [Toggle (_OUTLINES)]
-         __OUTLINES ("outlineSS", Float) = 0
+         __OUTLINES ("Outlines", Float) = 0
 
          [Toggle (_SILHOUETTE)]
-         __SILHOUETTE ("SILHOUETTE", Float) = 0
+         __SILHOUETTE ("Silhouette", Float) = 0
         
         
     }
     SubShader
     {
-        
-       // Tags { "RenderType"="Opaque" }
-        //LOD 100
        
         Pass 
        {
@@ -63,7 +58,6 @@ Shader "Unlit/newOutlines"
         Pass
         {
             
-            //Cull Off
             Blend SrcAlpha OneMinusSrcAlpha
             
             Stencil {
