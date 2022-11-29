@@ -105,15 +105,7 @@ Shader "Unlit/newOutlines"
                       return float4(0.0, 0.0, 0.0, 0.0);
                   #endif
               }
-              ENDCG
-
-            //  float4 frag(void) : COLOR {
-                
-            //      return float4(255.0,191.0,0.0,1.0);
-                
-            //  }
-
-            //  ENDCG           
+              ENDCG       
         }
         
         
@@ -155,12 +147,6 @@ Shader "Unlit/newOutlines"
                  #endif
              }
              ENDCG
-            //  float4 frag (void) : COLOR {       //was COLOR before and void
-                 
-            //          return float4(255.0, 191.0, 0.0, 1.0);
-        
-            //  }
-            //  ENDCG
 
          }
     }
