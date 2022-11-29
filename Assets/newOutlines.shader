@@ -7,17 +7,17 @@ Shader "Unlit/newOutlines"
         _Thickness ("Thickness", Float) = 0.1
         //[MaterialToggle] _Outlines("Outlines", Float) = 0
         //[MaterialToggle] _Silhouette("Silhouette", Float) = 0
-        // [Toggle (_OUTLINES)]
-        // __OUTLINES ("outlineSS", Float) = 0
+         [Toggle (_OUTLINES)]
+         __OUTLINES ("outlineSS", Float) = 0
 
-        // [Toggle (_SILHOUETTE)]
-        // __SILHOUETTE ("SILHOUETTE", Float) = 0
+         [Toggle (_SILHOUETTE)]
+         __SILHOUETTE ("SILHOUETTE", Float) = 0
         
         
     }
     SubShader
     {
-    
+        
        // Tags { "RenderType"="Opaque" }
         //LOD 100
        
@@ -63,15 +63,13 @@ Shader "Unlit/newOutlines"
         Pass
         {
             
-            //Tags{"LightMode" = "Regular"}
-            //public void SetShaderPassEnabled(string Regular, bool enabled);
-            Cull Off
-            //ZTest Always
+            //Cull Off
+            Blend SrcAlpha OneMinusSrcAlpha
             
             Stencil {
                 Ref 1
                 Comp NotEqual
-                Pass Keep //Keep was before
+                Pass Keep 
                 
             }
             
@@ -79,7 +77,7 @@ Shader "Unlit/newOutlines"
             #pragma vertex vert
             #pragma fragment frag 
 
-            //#pragma shader_feature _OUTLINES
+            #pragma shader_feature _OUTLINES
 
             #include "UnityCG.cginc"
 
@@ -106,62 +104,70 @@ Shader "Unlit/newOutlines"
             }
 
 
-            // float4 frag(void) : COLOR {
-            //     #ifdef _OUTLINES
-            //         return float4(255.0,191.0,0.0,1.0);
-            //     #else 
-            //         return float4(0.0, 0.0, 0.0, 0.0);
-            //     #endif
-            // }
+              float4 frag(void) : COLOR {
+                  #ifdef _OUTLINES
+                      return float4(255.0,191.0,0.0,1.0);
+                  #else 
+                      return float4(0.0, 0.0, 0.0, 0.0);
+                  #endif
+              }
+              ENDCG
 
-            float4 frag(void) : COLOR {
+            //  float4 frag(void) : COLOR {
                 
-                return float4(255.0,191.0,0.0,0.0);
+            //      return float4(255.0,191.0,0.0,1.0);
                 
-            }
+            //  }
 
-            ENDCG           
+            //  ENDCG           
         }
+        
         
 
 
-        // Pass{
-        //     ZTest Greater
-        //     CGPROGRAM
+         Pass{
+             ZTest Greater
+             Blend SrcAlpha OneMinusSrcAlpha        //the key
+             CGPROGRAM
 
-        //     #pragma vertex vert
-        //     #pragma fragment frag
-        //     #pragma shader_feature _SILHOUETTE
+             #pragma vertex vert
+             #pragma fragment frag
+             #pragma shader_feature _SILHOUETTE
 
-        //     #include "UnityCG.cginc"
+             #include "UnityCG.cginc"
 
-        //     struct MeshData {
-        //         float4 vertex : POSITION;
-        //         float3 normal : NORMAL;
-        //     };
+             struct MeshData {
+                 float4 vertex : POSITION;
+                 float3 normal : NORMAL;
+             };
 
-        //     struct Interpolators{
-        //         float4 vertex : POSITION;
-        //         float3 normal : NORMAL;
-        //     };
-        //     uniform float _Thickness;
+             struct Interpolators{
+                 float4 vertex : POSITION;
+                 float3 normal : NORMAL;
+             };
+             uniform float _Thickness;
 
-        //     Interpolators vert (MeshData a){
-        //         Interpolators t;
-        //         t.vertex = UnityObjectToClipPos(float4(a.normal,0.0) * _Thickness + a.vertex);
-        //         //t.vertex = fixed4(0,0,0,0);
-        //         return t;
-        //     }
+             Interpolators vert (MeshData a){
+                 Interpolators t;
+                 t.vertex = UnityObjectToClipPos(float4(a.normal,0.0) * _Thickness + a.vertex);
+                 return t;
+             }
 
-        //     float4 frag (void) : COLOR0 {       //was COLOR before and void
-        //         #ifdef _SILHOUETTE
-        //             return float4(255.0, 191.0, 0.0, 1.0);
-        //         #else
-        //             discard;     //was float 4 before
-        //         #endif
-        //     }
-        //     ENDCG
+             float4 frag (void) : COLOR0 {       //was COLOR before and void
+                 #ifdef _SILHOUETTE
+                     return float4(255.0, 191.0, 0.0, 1.0);
+                 #else
+                     return float4(0,0,0,0);     //was float 4 before
+                 #endif
+             }
+             ENDCG
+            //  float4 frag (void) : COLOR {       //was COLOR before and void
+                 
+            //          return float4(255.0, 191.0, 0.0, 1.0);
+        
+            //  }
+            //  ENDCG
 
-        // }
+         }
     }
 }
