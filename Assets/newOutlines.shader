@@ -59,7 +59,7 @@ Shader "Unlit/newOutlines"
         {
             Tags {"Queue" = "Geometry - 1"}
             Blend SrcAlpha OneMinusSrcAlpha
-            //Cull Off
+            // Cull Off
             ZTest Always
             Stencil {
                 Ref 1

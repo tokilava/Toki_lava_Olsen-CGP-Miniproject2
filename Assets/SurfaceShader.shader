@@ -11,7 +11,7 @@ Shader "Unlit/SurfaceShader"
         Pass
         {
             
-            //Blend Zero One
+            // Blend Zero One
             Cull Off
             //Tags {"Queue" = "Geometry - 1"}
             Stencil{

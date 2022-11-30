@@ -30,7 +30,7 @@ Material:
     m_Floats:
     - _Outlines: 0
     - _Silhouette: 0
-    - _Thickness: 0.02
+    - _Thickness: 0.04
     - __OUTLINES: 1
     - __SILHOUETTE: 0
     - _isToggled: 1
