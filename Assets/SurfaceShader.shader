@@ -12,12 +12,12 @@ Shader "Unlit/SurfaceShader"
         {
             
             //Blend Zero One
-            //Cull Off
-
+            Cull Off
+            //Tags {"Queue" = "Geometry - 1"}
             Stencil{
             Ref 2
             Comp NotEqual
-            Pass DecrWrap
+            Pass Keep
             }
             
             CGPROGRAM
@@ -36,8 +36,6 @@ Shader "Unlit/SurfaceShader"
                 float4 vertex : POSITION;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
 
             InterpolatorsSurface vert (MeshDataSurface v)
             {

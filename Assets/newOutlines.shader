@@ -57,13 +57,14 @@ Shader "Unlit/newOutlines"
         
         Pass
         {
-            
+            Tags {"Queue" = "Geometry - 1"}
             Blend SrcAlpha OneMinusSrcAlpha
-            
+            //Cull Off
+            ZTest Always
             Stencil {
                 Ref 1
                 Comp NotEqual
-                Pass Keep 
+                Pass Keep
                 
             }
             
@@ -100,7 +101,7 @@ Shader "Unlit/newOutlines"
 
               float4 frag(void) : COLOR {
                   #ifdef _OUTLINES
-                      return float4(255.0,191.0,0.0,1.0);
+                      return float4(0.0,0.0,0.0,1.0);
                   #else 
                       return float4(0.0, 0.0, 0.0, 0.0);
                   #endif
@@ -135,13 +136,14 @@ Shader "Unlit/newOutlines"
 
              Interpolators vert (MeshData a){
                  Interpolators t;
-                 t.vertex = UnityObjectToClipPos(float4(a.normal,0.0) * _Thickness + a.vertex);
+                 t.vertex = UnityObjectToClipPos(a.vertex);
+                 //t.vertex = UnityObjectToClipPos(float4(a.normal,0.0) * _Thickness + a.vertex);
                  return t;
              }
 
              float4 frag (void) : COLOR0 {       //was COLOR before and void
                  #ifdef _SILHOUETTE
-                     return float4(255.0, 191.0, 0.0, 1.0);
+                     return float4(0.0, 0.0, 0.0, 1.0);
                  #else
                      return float4(0,0,0,0);     //was float 4 before
                  #endif
