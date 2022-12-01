@@ -10,5 +10,5 @@ The shader features the manipulation of variables than can be manually tweaked:
   1st pass just adds a color to an object, but it also has a stencil test, to ensure that it always renders\
   2nd pass is the outlines. The outlines move the vertices towards their normal vectors, essentially making a larger version of the object itself, and covers it with a black color. There is also a stencil test in the 2nd pass which ensures that the outlines don't occlude the object fully but only renders the outlines which are not occluding the object.\
   3rd pass features a silhouette. It also just covers the object in the same color as the outlines, but it includes a ZTest which ensures that the silhouette is only rendered when the object is behind another object.\
-
-The script called "SurfaceShader" 
+ \
+The script called "SurfaceShader" is a script which ensures that the outlines of another object can be seen through the object which has the "SurfaceShader" script attached to it.\
