@@ -11,6 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 38ecf8132f63d5442bb02ef2ba1f1c6a, type: 3}
   m_ValidKeywords:
   - _OUTLINES
+  - _SILHOUETTE
   m_InvalidKeywords:
   - _ISTOGGLED_ON
   m_LightmapFlags: 4
@@ -33,7 +34,7 @@ Material:
     - _Thickness: 0.04
     - _ThicknessOfEdge: 0.03
     - __OUTLINES: 1
-    - __SILHOUETTE: 0
+    - __SILHOUETTE: 1
     - _isToggled: 1
     m_Colors: []
   m_BuildTextureStacks: []
