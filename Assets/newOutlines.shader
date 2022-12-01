@@ -116,7 +116,7 @@ Shader "Unlit/newOutlines"
         
 
 
-          Pass{
+          Pass{     //this pass covers the object in a black silhouette if the 3d-object is behind another surface
               ZTest Greater     //ZTest is a depth testing tool. if the depth is greater it makes sure that the silhouette always renders when its behind other objects which is why we use "Greater"
               Blend SrcAlpha OneMinusSrcAlpha        //allows us to set an alpha value for the float4 Color
               CGPROGRAM
